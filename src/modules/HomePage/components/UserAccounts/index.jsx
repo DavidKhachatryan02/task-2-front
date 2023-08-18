@@ -3,7 +3,7 @@ import AndroidIcon from "@mui/icons-material/Android";
 import GitHubIcon from "@mui/icons-material/GitHub";
 
 const styles = {
-  container: "flex flex-col gap-3.5 w-1/3 ",
+  container: "flex flex-col gap-3.5 w-1/4",
   title: "text-sky-900 text-base font-medium leading-loose",
 };
 

@@ -1,6 +1,8 @@
 import { TextField, FormControlLabel, Checkbox } from "@mui/material";
+import { DatePicker, LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from "dayjs";
 
-//!! check date and number fealds
 
 const styles = {
   mainContainer: "w-2/3 flex flex-col gap-2 ",
@@ -11,35 +13,43 @@ const styles = {
   Absences: " w-20",
 };
 
-const UserMainInfo = () => {
+const UserMainInfo = (user) => {
+  const parsedStartDate = dayjs(user.startDate);
+
   return (
-    <div className={styles.mainContainer}>
-      <p className={styles.title}>General Info</p>
-      <div className={styles.firstRow}>
-        <TextField label="firstName" variant="standard" />
-        <TextField label="Lastname" variant="standard" value="GAG" />
-        <TextField label="Date of birdth" variant="standard" />
+    <LocalizationProvider dateAdapter={AdapterDayjs}>
+      <div className={styles.mainContainer}>
+        <p className={styles.title}>General Info</p>
+        <div className={styles.firstRow}>
+          <TextField label="firstName" variant="standard" />
+          <TextField label="Lastname" variant="standard" value="GAG" />
+          <DatePicker disabled label="Date of birth" value={parsedStartDate} />
+        </div>
+        <div className={styles.secondRow}>
+          <TextField label="Email" variant="standard" />
+          <TextField label="Personal Email" variant="standard" size="small" />
+          <TextField label="phone number" variant="standard" type="number" />
+        </div>
+        <div className={styles.thirdRow}>
+          <DatePicker
+          disabled
+            label="Start date"
+            value={parsedStartDate}
+          />
+          <TextField
+            className={styles.Absences}
+            label="Absences"
+            variant="standard"
+            type="number"
+            value={15}
+          />
+          <FormControlLabel
+            control={<Checkbox checked={true} />}
+            label=" Core team member"
+          />
+        </div>
       </div>
-      <div className={styles.secondRow}>
-        <TextField label="Email" variant="standard" />
-        <TextField label="Personal Email" variant="standard" size="small" />
-        <TextField label="phone number" variant="standard" type="number" />
-      </div>
-      <div className={styles.thirdRow}>
-        <TextField label="Start Date" variant="standard" />
-        <TextField
-          className={styles.Absences}
-          label="Absences"
-          variant="standard"
-          type="number"
-          value={15}
-        />
-        <FormControlLabel
-          control={<Checkbox checked={true} />}
-          label=" Core team member"
-        />
-      </div>
-    </div>
+    </LocalizationProvider>
   );
 };
 
