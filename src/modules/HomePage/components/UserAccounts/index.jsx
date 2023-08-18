@@ -1,14 +1,16 @@
-import { TextField } from "@mui/material";
+import { TextField, InputAdornment } from "@mui/material";
 import AndroidIcon from "@mui/icons-material/Android";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import InputAdornment from "@mui/material/InputAdornment";
 
-const styles = {container:"w-1/3 "}
+const styles = {
+  container: "flex flex-col gap-3.5 w-1/3 ",
+  title: "text-sky-900 text-base font-medium leading-loose",
+};
 
 const UserAccounts = (user) => {
   return (
     <div className={styles.container}>
-      <p>My accounts</p>
+      <p className={styles.title}>My accounts</p>
       <TextField
         label="Slack"
         value={user.slackUserName}

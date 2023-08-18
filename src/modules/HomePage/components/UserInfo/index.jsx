@@ -34,13 +34,14 @@ const user = {
 };
 
 const styles = {
-  container:"w-full flex flex-col ml-9 mr-5 mt-4 gap-5	"
+  container:"w-full flex flex-col ml-9 mr-5 mt-4 gap-5	",
+  title:"text-sky-900 text-2xl font-medium leading-loose"
 }
 
 const UserInfo = () => {
   return (
     <div className={styles.container}>
-      <p>My Profile</p>
+      <p className={styles.title}>My Profile</p>
       <GeneralInfo {...user}/>
       <div className="bg-sky-400 h-1/3">baylusss</div>
     </div>
