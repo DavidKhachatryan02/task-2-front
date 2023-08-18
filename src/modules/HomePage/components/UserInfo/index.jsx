@@ -43,7 +43,6 @@ const UserInfo = () => {
     <div className={styles.container}>
       <p className={styles.title}>My Profile</p>
       <GeneralInfo {...user}/>
-      <div className="bg-sky-400 h-1/3">baylusss</div>
     </div>
   );
 };
