@@ -6,9 +6,11 @@ import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { PATHS } from "../../../../constants/paths";
 
 const styles = {
-  container: " flex flex-col justify-center  p-6 gap-3 w-2/3",
+  container:
+    "flex flex-col justify-center  items-center p-6 ml-16 gap-3 w-full md:w-2/3",
   title: "text-sky-900 text-xl md:text-2xl font-medium leading-loose mb-4",
   text: "text-sm",
+  clearButton: "pointer",
   inputContainer: "flex flex-row items-center gap-3",
   button: "w-max place-self-end pr-10",
 };
@@ -46,7 +48,7 @@ const CodeInput = () => {
           placeholder="*"
           onChange={onChange}
         />
-        <CloseOutlinedIcon onClick={clearCode} />
+        <CloseOutlinedIcon className={styles.clearButton} onClick={clearCode} />
       </div>
       <Button
         className={styles.button}
