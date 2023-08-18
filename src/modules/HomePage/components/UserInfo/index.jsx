@@ -33,9 +33,13 @@ const user = {
   isActive: true,
 };
 
+const styles = {
+  container:"w-full flex flex-col ml-9 mr-5 mt-4 gap-5	"
+}
+
 const UserInfo = () => {
   return (
-    <div className="w-full flex flex-col ml-9 mr-5 mt-4 gap-5	">
+    <div className={styles.container}>
       <p>My Profile</p>
       <GeneralInfo {...user}/>
       <div className="bg-sky-400 h-1/3">baylusss</div>
