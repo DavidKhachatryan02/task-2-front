@@ -1,11 +1,13 @@
-import LeftSplit from "../LeftSplit";
-import RightSplit from "../RightSplit";
+import LeftSplit from "../../../../ui/LoginPageleftSplit";
+import LoginInput from "../LoginInput";
+
+const styles = { container: " grid grid-cols-2 h-screen" };
 
 const LoginWidge = () => {
   return (
-    <div className=" grid grid-cols-2 gap-4 h-screen">
+    <div className={styles.container}>
       <LeftSplit />
-      <RightSplit/>
+      <LoginInput />
     </div>
   );
 };

@@ -1,8 +1,7 @@
+import { Verify } from "../modules/VerifyPage";
 
 const VerifyPage = () => {
-  return (
-    <div>VerifyPage</div>
-  )
-}
+  return <Verify />;
+};
 
-export default VerifyPage
+export default VerifyPage;
