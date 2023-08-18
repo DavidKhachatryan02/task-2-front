@@ -34,9 +34,9 @@ const user = {
 };
 
 const styles = {
-  container:"w-full flex flex-col ml-9 mr-5 mt-4 gap-5	",
-  title:"text-sky-900 text-2xl font-medium leading-loose"
-}
+  container: 'w-full md:flex-row items-start md:items-center md:justify-between px-4 md:px-8 py-6 md:py-8 ',
+  title: 'text-sky-900 text-3xl md:text-4xl font-medium leading-loose mb-4',
+};
 
 const UserInfo = () => {
   return (
