@@ -2,9 +2,8 @@ import { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { PATHS } from "../../../../constants/paths";
+import { PATHS } from "~/constants/paths";
 import { userEmail } from "~/constants/userSchema";
-
 
 const styles = {
   container:
@@ -24,11 +23,13 @@ const LoginInput = () => {
 
   const handleClick = async () => {
     const isValid = await userEmail.isValid(email);
-    if (isValid) {
-      alert(`Email entered: ${email}`);
-      navigate(PATHS.VERIFY);
-    } else {
-      toast.error("email in not valid");
+    try {
+      if (isValid) {
+        alert(`Email entered: ${email}`);
+        navigate(PATHS.VERIFY);
+      }
+    } catch (e) {
+      toast.error(`Login Error ${e}`);
     }
   };
 

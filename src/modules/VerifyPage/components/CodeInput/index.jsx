@@ -3,14 +3,14 @@ import { Button } from "@mui/material";
 import VerificationInput from "react-verification-input";
 import { useNavigate } from "react-router-dom";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
-import { PATHS } from "../../../../constants/paths";
+import { PATHS } from "~/constants/paths";
 
 const styles = {
   container:
     "flex flex-col justify-center  items-center p-6 ml-16 gap-3 w-full md:w-2/3",
   title: "text-sky-900 text-xl md:text-2xl font-medium leading-loose mb-4",
   text: "text-sm",
-  clearButton: "pointer",
+  clearButton: "cursor-pointer",
   inputContainer: "flex flex-row items-center gap-3",
   button: "w-max place-self-end pr-10",
 };

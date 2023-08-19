@@ -12,6 +12,7 @@ const UserAccounts = (user) => {
     <div className={styles.container}>
       <p className={styles.title}>My accounts</p>
       <TextField
+        disabled
         label="Slack"
         value={user.slackUserName}
         InputProps={{
@@ -24,6 +25,7 @@ const UserAccounts = (user) => {
         variant="standard"
       />
       <TextField
+        disabled
         label="GitHub"
         value={user.gitHubUserName}
         InputProps={{
