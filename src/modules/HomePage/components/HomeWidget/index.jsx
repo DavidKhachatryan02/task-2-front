@@ -2,7 +2,7 @@ import NavBar from "../NavBar";
 import UserInfo from "../UserInfo";
 
 const styles = {
-  container: "h-screen flex flex-row    	 ",
+  container: "h-screen flex flex-row ",
 };
 
 const HomeWidget = () => {

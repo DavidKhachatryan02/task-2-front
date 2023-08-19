@@ -1,26 +1,35 @@
-import  { useState } from 'react';
-import { TextField, Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
-import { PATHS } from '../../../../constants/paths';
+import { useState } from "react";
+import { TextField, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import { PATHS } from "../../../../constants/paths";
+import { userEmail } from "~/constants/userSchema";
+
 
 const styles = {
-  container: 'flex flex-col items-center justify-center p-6 gap-6 w-full md:w-2/3 ', 
-  title: 'text-sky-900 text-2xl md:text-3xl font-medium leading-loose mb-4', 
-  mailInput: 'w-full md:max-w-sm', 
-  button: 'w-max place-self-end pt-4',
+  container:
+    "flex flex-col items-center justify-center p-6 gap-6 w-full md:w-2/3 ",
+  title: "text-sky-900 text-2xl md:text-3xl font-medium leading-loose mb-4",
+  mailInput: "w-full md:max-w-sm",
+  button: "w-max place-self-end pt-4",
 };
 
 const LoginInput = () => {
   const navigate = useNavigate();
-  const [email, setEmail] = useState('');
+  const [email, setEmail] = useState("");
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
 
-  const handleClick = () => {
-    alert(`Email entered: ${email}`);
-    navigate(PATHS.VERIFY);
+  const handleClick = async () => {
+    const isValid = await userEmail.isValid(email);
+    if (isValid) {
+      alert(`Email entered: ${email}`);
+      navigate(PATHS.VERIFY);
+    } else {
+      toast.error("email in not valid");
+    }
   };
 
   return (
@@ -31,12 +40,15 @@ const LoginInput = () => {
         id="standard-basic"
         autoFocus={true}
         label="Enter your email"
-        type="email"
         variant="standard"
         value={email}
         onChange={handleEmailChange}
       />
-      <Button className={styles.button} variant="contained" onClick={handleClick}>
+      <Button
+        className={styles.button}
+        variant="contained"
+        onClick={handleClick}
+      >
         Send Code
       </Button>
     </form>
