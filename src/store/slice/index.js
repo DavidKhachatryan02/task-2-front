@@ -6,7 +6,7 @@ const userSlice = createSlice({
     email: "",
     code: "",
     languageID: "1",
-    userPerosnalData:{}
+    userPerosnalData: {},
   },
   reducers: {
     setUserEmail: (state, action) => {
@@ -16,10 +16,11 @@ const userSlice = createSlice({
       state.code = action.payload;
     },
     setUserPerosnalData: (state, action) => {
-        state.userPerosnalData = {...action.payload};
-      },
+      state.userPerosnalData = { ...action.payload };
+    },
   },
 });
 
-export const { setUserEmail, setUserCode,setUserPerosnalData } = userSlice.actions;
+export const { setUserEmail, setUserCode, setUserPerosnalData } =
+  userSlice.actions;
 export default userSlice.reducer;
