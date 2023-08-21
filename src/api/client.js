@@ -20,23 +20,23 @@ axiosInstance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// axiosInstance.interceptors.response.use(
-//   (response) => {
-//     return response;
-//   },
-//   async function (error) {
-//     const originalRequest = error.config;
-//     if (error.response.status === 403 && !originalRequest.retry) {
-//       originalRequest.retry = true;
-//       const oldAccessToken = Cookies.get(COOKIE_TOKEN_KEY);
-//       const refreshToken = Cookies.get(COOKIES_REFRESH_KEY);
-//       const responseData = await api.refreshToken(oldAccessToken, refreshToken);
-//       axios.defaults.headers.common["Authorization"] =
-//         "Bearer " + responseData.token;
-//       return axiosInstance(originalRequest);
-//     }
-//     return Promise.reject(error);
-//   }
-// );
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async function (error) {
+    const originalRequest = error.config;
+    if (error.response.status === 403 && !originalRequest.retry) {
+      originalRequest.retry = true;
+      const oldAccessToken = Cookies.get(COOKIE_TOKEN_KEY);
+      const refreshToken = Cookies.get(COOKIES_REFRESH_KEY);
+      const responseData = await api.auth.refreshToken(oldAccessToken, refreshToken);
+      Cookies.set(COOKIE_TOKEN_KEY,responseData.data.jwt.token)
+      config.headers.Authorization = `Bearer ${Cookies.get(COOKIE_TOKEN_KEY)}`;
+      return axiosInstance(originalRequest);
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default axiosInstance;
