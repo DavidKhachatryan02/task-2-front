@@ -5,10 +5,12 @@ import VerificationInput from "react-verification-input";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
+import { useDispatch, useSelector } from "react-redux";
 import { COOKIE_TOKEN_KEY, COOKIES_REFRESH_KEY } from "~/constants/config";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import api from "~/api";
 import { PATHS } from "~/constants/paths";
+import { setUserCode, setUserPerosnalData } from "~/store/slice";
 
 const styles = {
   container:
@@ -20,27 +22,28 @@ const styles = {
   button: "w-max place-self-end pr-10",
 };
 
-const languageID = "1";
-const email = "demo@demo.com";
-
 const CodeInput = () => {
   const navigate = useNavigate();
-
-  const [code, setCode] = useState("");
+  const dispatch = useDispatch();
+  const [inputCode, setInputCode] = useState("");
 
   const clearCode = () => {
-    setCode("");
+    setInputCode("");
   };
+
+  const email = useSelector((state) => state.user.email);
+  const languageID = useSelector((state) => state.user.languageID);
 
   const handleClick = async () => {
     try {
-      if (code.length === 6) {
-        const user = { email, languageID, code };
+      if (inputCode.length === 6) {
+        dispatch(setUserCode(inputCode));
+        const user = { languageID, email, code: inputCode };
         const response = await api.auth.login(user);
         Cookies.set(COOKIE_TOKEN_KEY, response.data.jwt.token);
         Cookies.set(COOKIES_REFRESH_KEY, response.data.jwt.refreshToken);
         const userData = await api.auth.getUser();
-        console.log(userData);
+        dispatch(setUserPerosnalData(userData.data));
         navigate(PATHS.HOME);
       } else {
         toast.error("invalid code");
@@ -52,7 +55,7 @@ const CodeInput = () => {
   };
 
   const onChange = (data) => {
-    setCode(data);
+    setInputCode(data);
   };
 
   return (
@@ -65,7 +68,7 @@ const CodeInput = () => {
       <div className={styles.inputContainer}>
         <VerificationInput
           autoFocus
-          value={code}
+          value={inputCode}
           validChars="0-9"
           placeholder="*"
           onChange={onChange}

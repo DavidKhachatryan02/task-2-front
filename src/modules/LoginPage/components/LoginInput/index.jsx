@@ -2,6 +2,8 @@ import { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux";
+import { setUserEmail } from "~/store/slice";
 import { PATHS } from "~/constants/paths";
 import { userEmail } from "~/constants/userSchema";
 
@@ -17,6 +19,8 @@ const LoginInput = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
+  const dispatch = useDispatch()
+
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -25,6 +29,7 @@ const LoginInput = () => {
     const isValid = await userEmail.isValid(email);
     try {
       if (isValid) {
+        dispatch(setUserEmail(email))
         navigate(PATHS.VERIFY);
       } else {
         toast.error("invalid Email");
@@ -33,6 +38,7 @@ const LoginInput = () => {
       toast.error(e);
     }
   };
+
 
   return (
     <form className={styles.container}>

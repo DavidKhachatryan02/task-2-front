@@ -1,27 +1,25 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  user: { languageID: "1" },
-};
-
-//!!todo
-
-export const userSlice = createSlice({
+const userSlice = createSlice({
   name: "user",
-  initialState,
+  initialState: {
+    email: "",
+    code: "",
+    languageID: "1",
+    userPerosnalData:{}
+  },
   reducers: {
-    setUserEmail: (email) => {
-      user.email = email;
+    setUserEmail: (state, action) => {
+      state.email = action.payload;
     },
-    setUserCode: (code) => {
-      user.code = code;
+    setUserCode: (state, action) => {
+      state.code = action.payload;
     },
-    incrementByAmount: (state, action) => {
-      user.value += action.payload;
-    },
+    setUserPerosnalData: (state, action) => {
+        state.userPerosnalData = {...action.payload};
+      },
   },
 });
 
-export const { setUserEmail, setUserCode} = userSlice.actions;
-
+export const { setUserEmail, setUserCode,setUserPerosnalData } = userSlice.actions;
 export default userSlice.reducer;
