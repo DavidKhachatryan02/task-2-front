@@ -21,12 +21,8 @@ const UserMainInfo = () => {
         <p className={styles.title}>General Info</p>
         <div className={styles.firstRow}>
           <TextField disabled label="First Name" variant="standard" />
-          <TextField
-            disabled
-            label="Last Name"
-            variant="standard"
-          />
-          <DatePicker disabled label="Date of Birth"  />
+          <TextField disabled label="Last Name" variant="standard" />
+          <DatePicker disabled label="Date of Birth" />
         </div>
         <div className={styles.secondRow}>
           <TextField disabled label="Email" variant="standard" />
@@ -39,7 +35,7 @@ const UserMainInfo = () => {
           />
         </div>
         <div className={styles.thirdRow}>
-          <DatePicker disabled label="Start Date"  />
+          <DatePicker disabled label="Start Date" />
           <TextField
             disabled
             className={styles.Absences}

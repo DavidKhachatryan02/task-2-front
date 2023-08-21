@@ -1,6 +1,3 @@
 import * as yup from "yup";
 
-export const userEmail = yup
-  .string()
-  .email()
-  .required();
+export const userEmail = yup.string().email().required();

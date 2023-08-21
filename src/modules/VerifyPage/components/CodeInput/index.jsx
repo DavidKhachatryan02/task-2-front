@@ -21,8 +21,7 @@ const styles = {
 };
 
 const languageID = "1";
-const email = "demo@demo.com"
-
+const email = "demo@demo.com";
 
 const CodeInput = () => {
   const navigate = useNavigate();
@@ -35,16 +34,17 @@ const CodeInput = () => {
 
   const handleClick = async () => {
     try {
-      if(code.length===6){
+      if (code.length === 6) {
         const user = { email, languageID, code };
-        const response = await api.auth.login(user); 
+        const response = await api.auth.login(user);
         Cookies.set(COOKIE_TOKEN_KEY, response.data.jwt.token);
         Cookies.set(COOKIES_REFRESH_KEY, response.data.jwt.refreshToken);
-        const userData = await api.auth.getUser()
-        console.log(userData)
+        const userData = await api.auth.getUser();
+        console.log(userData);
         navigate(PATHS.HOME);
+      } else {
+        toast.error("invalid code");
       }
-      else{toast.error("invalid code")}
     } catch (e) {
       if (e instanceof AxiosError)
         toast.error(e.response?.data.message || e.message);

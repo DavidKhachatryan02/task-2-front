@@ -14,7 +14,6 @@ const styles = {
 };
 
 const LoginInput = () => {
-
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
 
