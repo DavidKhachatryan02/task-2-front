@@ -2,8 +2,15 @@ import { useState } from "react";
 import { TextField, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { AxiosError } from "axios";
+import Cookies from "js-cookie";
 import { PATHS } from "~/constants/paths";
 import { userEmail } from "~/constants/userSchema";
+import api from "~/api";
+import { COOKIE_TOKEN_KEY, COOKIES_REFRESH_KEY } from "~/constants/config";
+
+const languageID = "1";
+const code = "111111";
 
 const styles = {
   container:
@@ -25,11 +32,19 @@ const LoginInput = () => {
     const isValid = await userEmail.isValid(email);
     try {
       if (isValid) {
-        alert(`Email entered: ${email}`);
+        const userData = { email, languageID, code };
+        console.log()
+        const response = await api.auth.login(userData); 
+        Cookies.set(COOKIE_TOKEN_KEY, response.data.jwt.token);
+        Cookies.set(COOKIES_REFRESH_KEY, response.data.jwt.refreshToken);
+        console.log(response)
         navigate(PATHS.VERIFY);
+      } else {
+        toast.error("invalid Email");
       }
     } catch (e) {
-      toast.error(`Login Error ${e}`);
+      if (e instanceof AxiosError)
+        toast.error(e.response?.data.message || e.message);
     }
   };
 

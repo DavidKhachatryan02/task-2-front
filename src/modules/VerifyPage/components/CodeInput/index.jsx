@@ -1,8 +1,11 @@
 import { useState } from "react";
+import { AxiosError } from "axios";
 import { Button } from "@mui/material";
 import VerificationInput from "react-verification-input";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
+import api from "~/api";
 import { PATHS } from "~/constants/paths";
 
 const styles = {
@@ -24,9 +27,18 @@ const CodeInput = () => {
     setCode("");
   };
 
-  const handleClick = () => {
-    alert(`Code entered: ${code}`);
-    navigate(PATHS.HOME);
+  const handleClick = async () => {
+    try {
+      if(code.length===6){
+        const newUserData = await api.auth.getUser();
+        console.log(newUserData);
+        navigate(PATHS.HOME);
+      }
+      else{toast.error("invalid code")}
+    } catch (e) {
+      if (e instanceof AxiosError)
+        toast.error(e.response?.data.message || e.message);
+    }
   };
 
   const onChange = (data) => {
