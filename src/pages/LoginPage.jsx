@@ -5,22 +5,15 @@ import { PATHS } from "~/constants/paths";
 import { Login } from "../modules/LoginPage";
 
 const LoginPage = () => {
-  const login = useSelector((state) => state.user.login);
+  const user = useSelector((state) => state.user.userPerosnalData);
+  const navigate = useNavigate();
 
+  useEffect(() => {
+    if (JSON.stringify(user) !== "{}") {
+      navigate(PATHS.HOME);
+    }
+  }, []);
   return <Login />;
 };
 
 export default LoginPage;
-
-
-//   const navigate = useNavigate();
-
-//   useEffect(() => {
-//     if (JSON.stringify(user) === "{}") {
-//       navigate(PATHS.LOGIN);
-//     }
-//   }, [user, navigate]);
-
-//   return <Home />;
-// };
-

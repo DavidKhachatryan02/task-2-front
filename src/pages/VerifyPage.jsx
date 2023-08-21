@@ -6,10 +6,13 @@ import { Verify } from "../modules/VerifyPage";
 
 const VerifyPage = () => {
   const email = useSelector((state) => state.user.email);
+  const user = useSelector((state) => state.user.userPerosnalData);
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!email) {
+    if (JSON.stringify(user) !== "{}") {
+      navigate(PATHS.HOME);
+    } else if (!email) {
       navigate(PATHS.LOGIN);
     }
   }, []);
