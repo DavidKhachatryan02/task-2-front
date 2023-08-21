@@ -30,8 +30,11 @@ axiosInstance.interceptors.response.use(
       originalRequest.retry = true;
       const oldAccessToken = Cookies.get(COOKIE_TOKEN_KEY);
       const refreshToken = Cookies.get(COOKIES_REFRESH_KEY);
-      const responseData = await api.auth.refreshToken(oldAccessToken, refreshToken);
-      Cookies.set(COOKIE_TOKEN_KEY,responseData.data.jwt.token)
+      const responseData = await api.auth.refreshToken(
+        oldAccessToken,
+        refreshToken
+      );
+      Cookies.set(COOKIE_TOKEN_KEY, responseData.data.jwt.token);
       config.headers.Authorization = `Bearer ${Cookies.get(COOKIE_TOKEN_KEY)}`;
       return axiosInstance(originalRequest);
     }

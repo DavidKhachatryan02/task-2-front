@@ -3,7 +3,7 @@ import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCale
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 
 const styles = {
-  nabar: 'bg-[#003367] h-ful left-0 w-16 flex flex-col items-center py-5',
+  nabar: 'fixed bg-[#003367] h-full left-0 w-16 flex flex-col items-center py-5 ',
   menuIcon: 'mb-3 md:mb-10',
   dashboard: 'mb-3 md:mb-7 opacity-60', 
 };

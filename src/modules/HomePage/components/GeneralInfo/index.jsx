@@ -1,15 +1,15 @@
-import UserAccounts from '../UserAccounts';
-import UserMainInfo from '../UserMainInfo';
+import UserAccounts from "../UserAccounts";
+import UserMainInfo from "../UserMainInfo";
 
 const styles = {
-  container: 'flex flex-col md:flex-row mb-10  md:mb-0',
+  container: "flex flex-col md:flex-row mb-10  md:mb-0",
 };
 
-const GeneralInfo = (user) => {
+const GeneralInfo = () => {
   return (
     <div className={styles.container}>
-      <UserMainInfo {...user} />
-      <UserAccounts {...user} />
+      <UserMainInfo />
+      <UserAccounts />
     </div>
   );
 };

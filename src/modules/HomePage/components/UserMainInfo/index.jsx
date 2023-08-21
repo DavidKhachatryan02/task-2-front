@@ -12,8 +12,8 @@ const styles = {
   Absences: "w-20",
 };
 
-const UserMainInfo = (user) => {
-  const parsedStartDate = dayjs(user.startDate);
+const UserMainInfo = () => {
+  // const parsedStartDate = dayjs(user.startDate);
 
   return (
     <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -25,9 +25,8 @@ const UserMainInfo = (user) => {
             disabled
             label="Last Name"
             variant="standard"
-            value="GAG"
           />
-          <DatePicker disabled label="Date of Birth" value={parsedStartDate} />
+          <DatePicker disabled label="Date of Birth"  />
         </div>
         <div className={styles.secondRow}>
           <TextField disabled label="Email" variant="standard" />
@@ -40,7 +39,7 @@ const UserMainInfo = (user) => {
           />
         </div>
         <div className={styles.thirdRow}>
-          <DatePicker disabled label="Start Date" value={parsedStartDate} />
+          <DatePicker disabled label="Start Date"  />
           <TextField
             disabled
             className={styles.Absences}

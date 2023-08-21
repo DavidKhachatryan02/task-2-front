@@ -7,14 +7,13 @@ const styles = {
   title: "text-sky-900 text-base font-medium leading-loose",
 };
 
-const UserAccounts = (user) => {
+const UserAccounts = () => {
   return (
     <div className={styles.container}>
       <p className={styles.title}>My accounts</p>
       <TextField
         disabled
         label="Slack"
-        value={user.slackUserName}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
@@ -27,7 +26,6 @@ const UserAccounts = (user) => {
       <TextField
         disabled
         label="GitHub"
-        value={user.gitHubUserName}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
