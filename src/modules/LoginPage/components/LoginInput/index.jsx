@@ -18,24 +18,23 @@ const styles = {
 const LoginInput = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
+  const [isButtonValid, setIsButtonValid] = useState(false);
 
   const dispatch = useDispatch();
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
+  const handleEmailChange = async (event) => {
+    const newEmail = event.target.value;
+    setEmail(newEmail);
+    const isValid = await userEmail.isValid(newEmail);
+    setIsButtonValid(isValid);
   };
 
   const handleClick = async () => {
-    const isValid = await userEmail.isValid(email);
     try {
-      if (isValid) {
-        dispatch(setUserEmail(email));
-        navigate(PATHS.VERIFY);
-      } else {
-        toast.error("invalid Email");
-      }
+      dispatch(setUserEmail(email));
+      navigate(PATHS.VERIFY);
     } catch (e) {
-      toast.error(e);
+      toast.error(e.message);
     }
   };
 
@@ -52,6 +51,7 @@ const LoginInput = () => {
         onChange={handleEmailChange}
       />
       <Button
+        disabled={!isButtonValid}
         className={styles.button}
         variant="contained"
         onClick={handleClick}

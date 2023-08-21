@@ -25,10 +25,14 @@ const styles = {
 const CodeInput = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [inputCode, setInputCode] = useState("");
+  const [code, setCode] = useState("");
 
   const clearCode = () => {
-    setInputCode("");
+    setCode("");
+  };
+
+  const onChange = (newCode) => {
+    setCode(newCode);
   };
 
   const email = useSelector((state) => state.user.email);
@@ -36,26 +40,20 @@ const CodeInput = () => {
 
   const handleClick = async () => {
     try {
-      if (inputCode.length === 6) {
-        dispatch(setUserCode(inputCode));
-        const user = { languageID, email, code: inputCode };
+      if (code.length === 6) {
+        dispatch(setUserCode(code));
+        const user = { languageID, email, code };
         const response = await api.auth.login(user);
         Cookies.set(COOKIE_TOKEN_KEY, response.data.jwt.token);
         Cookies.set(COOKIES_REFRESH_KEY, response.data.jwt.refreshToken);
         const userData = await api.auth.getUser();
         dispatch(setUserPerosnalData(userData.data));
         navigate(PATHS.HOME);
-      } else {
-        toast.error("invalid code");
       }
     } catch (e) {
       if (e instanceof AxiosError)
         toast.error(e.response?.data.message || e.message);
     }
-  };
-
-  const onChange = (data) => {
-    setInputCode(data);
   };
 
   return (
@@ -68,7 +66,7 @@ const CodeInput = () => {
       <div className={styles.inputContainer}>
         <VerificationInput
           autoFocus
-          value={inputCode}
+          value={code}
           validChars="0-9"
           placeholder="*"
           onChange={onChange}
@@ -76,6 +74,7 @@ const CodeInput = () => {
         <CloseOutlinedIcon className={styles.clearButton} onClick={clearCode} />
       </div>
       <Button
+        disabled={code.length !== 6}
         className={styles.button}
         variant="contained"
         onClick={handleClick}
