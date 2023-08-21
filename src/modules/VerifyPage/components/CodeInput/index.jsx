@@ -4,6 +4,8 @@ import { Button } from "@mui/material";
 import VerificationInput from "react-verification-input";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import Cookies from "js-cookie";
+import { COOKIE_TOKEN_KEY, COOKIES_REFRESH_KEY } from "~/constants/config";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import api from "~/api";
 import { PATHS } from "~/constants/paths";
@@ -18,6 +20,10 @@ const styles = {
   button: "w-max place-self-end pr-10",
 };
 
+const languageID = "1";
+const email = "demo@demo.com"
+
+
 const CodeInput = () => {
   const navigate = useNavigate();
 
@@ -30,8 +36,12 @@ const CodeInput = () => {
   const handleClick = async () => {
     try {
       if(code.length===6){
-        const newUserData = await api.auth.getUser();
-        console.log(newUserData);
+        const user = { email, languageID, code };
+        const response = await api.auth.login(user); 
+        Cookies.set(COOKIE_TOKEN_KEY, response.data.jwt.token);
+        Cookies.set(COOKIES_REFRESH_KEY, response.data.jwt.refreshToken);
+        const userData = await api.auth.getUser()
+        console.log(userData)
         navigate(PATHS.HOME);
       }
       else{toast.error("invalid code")}

@@ -26,16 +26,17 @@ axiosInstance.interceptors.response.use(
   },
   async function (error) {
     const originalRequest = error.config;
-    if (error.response.status === 403 && !originalRequest.retry) {
+    if (error.response.status === 401 && !originalRequest.retry) {
       originalRequest.retry = true;
       const oldAccessToken = Cookies.get(COOKIE_TOKEN_KEY);
       const refreshToken = Cookies.get(COOKIES_REFRESH_KEY);
-      const responseData = await api.auth.refreshToken(
-        oldAccessToken,
-        refreshToken
-      );
-      Cookies.set(COOKIE_TOKEN_KEY, responseData.data.jwt.token);
-      config.headers.Authorization = `Bearer ${Cookies.get(COOKIE_TOKEN_KEY)}`;
+      const refreshData = {
+        token: oldAccessToken,
+        refreshToken,
+      };
+      const responseData = await api.auth.refreshToken(refreshData);
+      Cookies.set(COOKIE_TOKEN_KEY, responseData.data.token);
+      config.headers.Authorization = `Bearer ${responseData.data.token}`;
       return axiosInstance(originalRequest);
     }
     return Promise.reject(error);

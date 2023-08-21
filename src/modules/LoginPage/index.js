@@ -1,1 +1,1 @@
-export {default as Login} from './components/LoginWidget'
+export { default as Login } from "./components/LoginWidget";

@@ -1,1 +1,1 @@
-export {default as Verify} from './components/VerifyWidget'
+export { default as Verify } from "./components/VerifyWidget";

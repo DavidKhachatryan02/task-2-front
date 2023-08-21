@@ -1,1 +1,1 @@
-export {default as Home} from './components/HomeWidget'
+export { default as Home } from "./components/HomeWidget";
