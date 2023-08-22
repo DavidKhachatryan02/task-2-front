@@ -1,13 +1,13 @@
 const styles = {
-  spinner:
-    "h-screen flex items-center justify-center animate-spin inline-block w-8 h-8 border-[3px] border-current border-t-transparent text-blue-600 rounded-full",
-  span: "sr-only",
+  container:
+    "fixed top-0 left-0 w-screen h-screen bg-gray-300 flex items-center justify-center",
+  spinner: "animate-spin rounded-full h-16 w-16 border-t-4 border-blue-500",
 };
 
 const LoadingPage = () => {
   return (
-    <div className={styles.spinner} role="status" aria-label="loading">
-      <span className={styles.span}>Loading...</span>
+    <div className={styles.container} role="status" aria-label="loading">
+      <div className={styles.spinner}></div>
     </div>
   );
 };
