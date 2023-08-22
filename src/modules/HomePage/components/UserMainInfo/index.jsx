@@ -70,6 +70,7 @@ const UserMainInfo = () => {
             value={userPersonalData.absences}
           />
           <FormControlLabel
+            disabled
             control={<Checkbox checked={userPersonalData.isCoreTeamMember} />}
             label="Core Team Member"
           />

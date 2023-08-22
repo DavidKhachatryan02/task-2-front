@@ -11,8 +11,9 @@ import { PATHS } from "~/constants/paths";
 const styles = {
   nabar:
     "fixed bg-[#003367] h-full left-0 w-16 flex flex-col items-center py-5",
-  menuIcon: "mb-3 md:mb-10",
-  dashboard: "mb-3 md:mb-7 opacity-60",
+  menuIcon: "mb-3 md:mb-10 cursor-pointer ",
+  dashboard: "mb-3 md:mb-7 opacity-60 cursor-pointer hover:opacity-100",
+  userInfo: "cursor-pointer",
   logoutIcon: "opacity-60 mt-auto cursor-pointer hover:opacity-100",
 };
 
@@ -34,7 +35,10 @@ const NavBar = () => {
         htmlColor={iconColorWhite}
         className={styles.dashboard}
       />
-      <PermContactCalendarOutlinedIcon htmlColor={iconColorWhite} />
+      <PermContactCalendarOutlinedIcon
+        className={styles.userInfo}
+        htmlColor={iconColorWhite}
+      />
       <LogoutIcon
         className={styles.logoutIcon}
         htmlColor={iconColorWhite}

@@ -1,16 +1,16 @@
 import { useState } from "react";
-import { AxiosError } from "axios";
+import { useSelector, useDispatch } from "react-redux";
 import { Button } from "@mui/material";
 import VerificationInput from "react-verification-input";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import Cookies from "js-cookie";
-import { useDispatch, useSelector } from "react-redux";
-import { COOKIE_TOKEN_KEY, COOKIES_REFRESH_KEY } from "~/constants/config";
+import { AxiosError } from "axios";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import api from "~/api";
 import { PATHS } from "~/constants/paths";
 import { setUserCode, setUserPersonalData } from "~/store/slice";
+import { COOKIE_TOKEN_KEY, COOKIES_REFRESH_KEY } from "~/constants/config";
 
 const styles = {
   container:
@@ -35,8 +35,7 @@ const CodeInput = () => {
     setCode(newCode);
   };
 
-  const email = useSelector((state) => state.user.email);
-  const languageID = useSelector((state) => state.user.languageID);
+  const { email, languageID } = useSelector((state) => state.user);
 
   const handleClick = async () => {
     try {
@@ -52,7 +51,7 @@ const CodeInput = () => {
       }
     } catch (e) {
       if (e instanceof AxiosError)
-        toast.error(e.response?.data.message || e.message);
+        toast.error(e?.response?.data?.message || e.message);
     }
   };
 
