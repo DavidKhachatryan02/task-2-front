@@ -1,7 +1,7 @@
 import  { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { Home } from "../modules/HomePage";
 import { useSelector } from "react-redux";
+import { Home } from "../modules/HomePage";
 import { PATHS } from "~/constants/paths";
 
 const HomePage = () => {
