@@ -37,9 +37,13 @@ const CodeInput = () => {
 
   const { email, languageID } = useSelector((state) => state.user);
 
+  const isValidCode = () => {
+    return code.length === 6;
+  };
+
   const handleClick = async () => {
     try {
-      if (code.length === 6) {
+      if (isValidCode()) {
         dispatch(setUserCode(code));
         const user = { languageID, email, code };
         const response = await api.auth.login(user);
@@ -73,7 +77,7 @@ const CodeInput = () => {
         <CloseOutlinedIcon className={styles.clearButton} onClick={clearCode} />
       </div>
       <Button
-        disabled={code.length !== 6}
+        disabled={!isValidCode()}
         className={styles.button}
         variant="contained"
         onClick={handleClick}
