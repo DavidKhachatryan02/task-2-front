@@ -5,7 +5,7 @@ import { PATHS } from "~/constants/paths";
 import { Login } from "../modules/LoginPage";
 
 const LoginPage = () => {
-  const user = useSelector((state) => state.user.userPerosnalData);
+  const user = useSelector((state) => state.user.userPersonalData);
   const navigate = useNavigate();
 
   useEffect(() => {

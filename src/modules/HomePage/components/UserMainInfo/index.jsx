@@ -14,7 +14,7 @@ const styles = {
 };
 
 const UserMainInfo = () => {
-  const userPersonalData = useSelector((state) => state.user.userPerosnalData);
+  const userPersonalData = useSelector((state) => state.user.userPersonalData);
 
   const parsedStartDate = dayjs(userPersonalData.startDate);
   const parsedBirthDate = dayjs(userPersonalData.dateOfBirth);

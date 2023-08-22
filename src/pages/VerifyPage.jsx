@@ -6,7 +6,7 @@ import { Verify } from "../modules/VerifyPage";
 
 const VerifyPage = () => {
   const email = useSelector((state) => state.user.email);
-  const user = useSelector((state) => state.user.userPerosnalData);
+  const user = useSelector((state) => state.user.userPersonalData);
   const navigate = useNavigate();
 
   useEffect(() => {

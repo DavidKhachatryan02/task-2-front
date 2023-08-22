@@ -9,7 +9,7 @@ const styles = {
 };
 
 const UserAccounts = () => {
-  const userPersonalData = useSelector((state) => state.user.userPerosnalData);
+  const userPersonalData = useSelector((state) => state.user.userPersonalData);
 
   return (
     <div className={styles.container}>

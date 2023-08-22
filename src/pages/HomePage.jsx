@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import { PATHS } from "~/constants/paths";
 
 const HomePage = () => {
-  const user = useSelector((state) => state.user.userPerosnalData);
+  const user = useSelector((state) => state.user.userPersonalData);
   const navigate = useNavigate();
 
   useEffect(() => {

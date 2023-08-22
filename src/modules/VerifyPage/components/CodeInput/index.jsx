@@ -10,7 +10,7 @@ import { COOKIE_TOKEN_KEY, COOKIES_REFRESH_KEY } from "~/constants/config";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import api from "~/api";
 import { PATHS } from "~/constants/paths";
-import { setUserCode, setUserPerosnalData } from "~/store/slice";
+import { setUserCode, setUserPersonalData } from "~/store/slice";
 
 const styles = {
   container:
@@ -47,7 +47,7 @@ const CodeInput = () => {
         Cookies.set(COOKIE_TOKEN_KEY, response.data.jwt.token);
         Cookies.set(COOKIES_REFRESH_KEY, response.data.jwt.refreshToken);
         const userData = await api.auth.getUser();
-        dispatch(setUserPerosnalData(userData.data));
+        dispatch(setUserPersonalData(userData.data));
         navigate(PATHS.HOME);
       }
     } catch (e) {
