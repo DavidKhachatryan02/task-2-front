@@ -1,9 +1,10 @@
+import { lazy } from "react";
 import { PATHS } from "./paths";
 
-import LoginPage from "../pages/LoginPage";
-import VerifyPage from "../pages/VerifyPage";
-import HomePage from "../pages/HomePage";
-import ErrorPage from "../pages/Errorpage";
+const LoginPage = lazy(() => import("~/pages/LoginPage"));
+const VerifyPage = lazy(() => import("~/pages/VerifyPage"));
+const HomePage = lazy(() => import("~/pages/HomePage"));
+const ErrorPage = lazy(() => import("~/pages/ErrorPage"));
 
 export const ROOT_ROUTES = [
   { path: PATHS.HOME, element: <HomePage /> },

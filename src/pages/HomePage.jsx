@@ -1,8 +1,8 @@
-import  { useEffect } from "react";
+import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Home } from "../modules/HomePage";
 import { PATHS } from "~/constants/paths";
+import { Home } from "../modules/HomePage";
 
 const HomePage = () => {
   const user = useSelector((state) => state.user.userPersonalData);
@@ -12,7 +12,7 @@ const HomePage = () => {
     if (JSON.stringify(user) === "{}") {
       navigate(PATHS.LOGIN);
     }
-  },[]);
+  }, []);
 
   return <Home />;
 };

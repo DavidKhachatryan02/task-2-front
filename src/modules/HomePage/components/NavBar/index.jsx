@@ -1,12 +1,14 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 import MenuIcon from "@mui/icons-material/Menu";
 import PermContactCalendarOutlinedIcon from "@mui/icons-material/PermContactCalendarOutlined";
 import DashboardOutlinedIcon from "@mui/icons-material/DashboardOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { setUserPersonalData } from "~/store/slice";
 import { PATHS } from "~/constants/paths";
+import { COOKIE_TOKEN_KEY, COOKIES_REFRESH_KEY } from "~/constants/config";
 
 const styles = {
   nabar:
@@ -26,6 +28,8 @@ const NavBar = () => {
   const handleLogout = () => {
     dispatch(setUserPersonalData({}));
     navigate(PATHS.LOGIN);
+    Cookies.set(COOKIE_TOKEN_KEY,"");
+    Cookies.set(COOKIES_REFRESH_KEY,"");
   };
 
   return (
