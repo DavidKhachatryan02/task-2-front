@@ -22,7 +22,7 @@ const styles = {
   button: "w-max place-self-end pr-10",
 };
 
-const isValidCode = () => {
+const isValidCode = (code) => {
   return code.length === 6;
 };
 
@@ -41,7 +41,7 @@ const CodeInput = () => {
 
   const handleSubmit = async () => {
     try {
-      if (isValidCode()) {
+      if (isValidCode(code)) {
         const email = sessionStorage.getItem("email");
         const response = await api.auth.login({ email, code, languageID: "1" });
 
@@ -60,7 +60,7 @@ const CodeInput = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className={styles.container}>
+    <form className={styles.container}>
       <p className={styles.title}>Login</p>
       <p className={styles.text}>
         To finalize your verification, please enter the code that has been sent
@@ -77,10 +77,10 @@ const CodeInput = () => {
         <CloseOutlinedIcon className={styles.clearButton} onClick={clearCode} />
       </div>
       <Button
-        disabled={!isValidCode()}
+        disabled={!isValidCode(code)}
         className={styles.button}
         variant="contained"
-        type="sumbit"
+        onClick={handleSubmit}
       >
         SUBMIT
       </Button>

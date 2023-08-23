@@ -15,7 +15,7 @@ const userSlice = createSlice({
       loaded: true,
     }),
     logout: () => {
-      seesionStorage.removeItem("email");
+      sessionStorage.removeItem("email");
       return {
         data: null,
         loaded: true,

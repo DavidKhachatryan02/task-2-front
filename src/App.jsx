@@ -18,7 +18,7 @@ const App = () => {
         if (data) {
           dispatch(login(data));
         } else {
-          dispatch(logout);
+          dispatch(logout());
         }
       })
       .catch((e) => console.log(e));
