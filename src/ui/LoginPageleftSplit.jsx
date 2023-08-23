@@ -1,4 +1,4 @@
-import LoginPageImg from "../assets/LoginPageImg.png";
+import LoginPageImg from "~/assets/LoginPageImg.png";
 
 const styles = {
   container: "bg-neutral-100 flex flex-col justify-center items-center",

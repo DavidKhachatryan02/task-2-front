@@ -1,9 +1,7 @@
 import { useState } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { TextField, Button } from "@mui/material";
-import { setUserEmail } from "~/store/slice";
 import { PATHS } from "~/constants/paths";
 import { userEmail } from "~/constants/userSchema";
 
@@ -20,18 +18,17 @@ const LoginInput = () => {
   const [email, setEmail] = useState("");
   const [isButtonValid, setIsButtonValid] = useState(false);
 
-  const dispatch = useDispatch();
-
   const handleEmailChange = async (event) => {
     const newEmail = event.target.value;
-    setEmail(newEmail);
     const isValid = await userEmail.isValid(newEmail);
+    setEmail(newEmail);
     setIsButtonValid(isValid);
   };
 
-  const handleClick = async () => {
+  const handleSubmit = (event) => {
     try {
-      dispatch(setUserEmail(email));
+      event.preventDefault();
+      sessionStorage.setItem("email", email);
       navigate(PATHS.VERIFY);
     } catch (e) {
       toast.error(e.message);
@@ -39,7 +36,7 @@ const LoginInput = () => {
   };
 
   return (
-    <form className={styles.container}>
+    <form onSubmit={handleSubmit} className={styles.container}>
       <p className={styles.title}>Login</p>
       <TextField
         className={styles.mailInput}
@@ -54,7 +51,7 @@ const LoginInput = () => {
         disabled={!isButtonValid}
         className={styles.button}
         variant="contained"
-        onClick={handleClick}
+        type="sumbit"
       >
         Send Code
       </Button>

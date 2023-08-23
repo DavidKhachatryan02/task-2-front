@@ -1,6 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
-import { REST_API_URL } from "../constants/enviroment";
+import { REST_API_URL } from "~/constants/enviroment";
 import { COOKIE_TOKEN_KEY, COOKIES_REFRESH_KEY } from "~/constants/config";
 import api from ".";
 
@@ -30,13 +30,15 @@ axiosInstance.interceptors.response.use(
       originalRequest.retry = true;
       const oldAccessToken = Cookies.get(COOKIE_TOKEN_KEY);
       const refreshToken = Cookies.get(COOKIES_REFRESH_KEY);
-      const refreshData = {
-        token: oldAccessToken,
+
+      const responseData = await api.auth.refreshToken({
         refreshToken,
-      };
-      const responseData = await api.auth.refreshToken(refreshData);
+        token: oldAccessToken,
+      });
       Cookies.set(COOKIE_TOKEN_KEY, responseData.data.token);
-      config.headers.Authorization = `Bearer ${responseData.data.token}`;
+      axios.defaults.headers.common[
+        "Authorization"
+      ] = `Bearer ${responseData.data.token}`;
       return axiosInstance(originalRequest);
     }
     return Promise.reject(error);

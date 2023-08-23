@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import { TextField, InputAdornment } from "@mui/material";
 import AndroidIcon from "@mui/icons-material/Android";
 import GitHubIcon from "@mui/icons-material/GitHub";
+import { selectUser } from "~/store/selectors/userSelectors";
 
 const styles = {
   container: "flex flex-col gap-3.5 xl:w-1/5 ",
@@ -9,7 +10,7 @@ const styles = {
 };
 
 const UserAccounts = () => {
-  const userPersonalData = useSelector((state) => state.user.userPersonalData);
+  const { slackUserName, gitHubUserName } = useSelector(selectUser);
 
   return (
     <div className={styles.container}>
@@ -24,13 +25,13 @@ const UserAccounts = () => {
             </InputAdornment>
           ),
         }}
-        value={userPersonalData.slackUserName}
+        value={slackUserName}
         variant="standard"
       />
       <TextField
         disabled
         label="GitHub"
-        value={userPersonalData.gitHubUserName}
+        value={gitHubUserName}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">

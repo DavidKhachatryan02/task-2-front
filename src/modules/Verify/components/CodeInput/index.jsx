@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Button } from "@mui/material";
 import VerificationInput from "react-verification-input";
 import { useNavigate } from "react-router-dom";
@@ -9,8 +9,8 @@ import Cookies from "js-cookie";
 import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import api from "~/api";
 import { PATHS } from "~/constants/paths";
-import { setUserCode, setUserPersonalData } from "~/store/slice";
 import { COOKIE_TOKEN_KEY, COOKIES_REFRESH_KEY } from "~/constants/config";
+import { login } from "~/store/slice/userSlice";
 
 const styles = {
   container:
@@ -20,6 +20,10 @@ const styles = {
   clearButton: "cursor-pointer",
   inputContainer: "flex flex-row items-center gap-3",
   button: "w-max place-self-end pr-10",
+};
+
+const isValidCode = () => {
+  return code.length === 6;
 };
 
 const CodeInput = () => {
@@ -35,22 +39,18 @@ const CodeInput = () => {
     setCode(newCode);
   };
 
-  const { email, languageID } = useSelector((state) => state.user);
-
-  const isValidCode = () => {
-    return code.length === 6;
-  };
-
-  const handleClick = async () => {
+  const handleSubmit = async () => {
     try {
       if (isValidCode()) {
-        dispatch(setUserCode(code));
-        const user = { languageID, email, code };
-        const response = await api.auth.login(user);
+        const email = sessionStorage.getItem("email");
+        const response = await api.auth.login({ email, code, languageID: "1" });
+
         Cookies.set(COOKIE_TOKEN_KEY, response.data.jwt.token);
         Cookies.set(COOKIES_REFRESH_KEY, response.data.jwt.refreshToken);
-        const userData = await api.auth.getUser();
-        dispatch(setUserPersonalData(userData.data));
+
+        const { data } = await api.auth.getUser();
+
+        dispatch(login(data));
         navigate(PATHS.HOME);
       }
     } catch (e) {
@@ -60,7 +60,7 @@ const CodeInput = () => {
   };
 
   return (
-    <form className={styles.container}>
+    <form onSubmit={handleSubmit} className={styles.container}>
       <p className={styles.title}>Login</p>
       <p className={styles.text}>
         To finalize your verification, please enter the code that has been sent
@@ -80,7 +80,7 @@ const CodeInput = () => {
         disabled={!isValidCode()}
         className={styles.button}
         variant="contained"
-        onClick={handleClick}
+        type="sumbit"
       >
         SUBMIT
       </Button>
